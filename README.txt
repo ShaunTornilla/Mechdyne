@@ -13,6 +13,12 @@ LAUNCH VIRTUAL ENVIRONMENT (venv):
 To Create venv:
 python -m venv [PATH TO PROJECT FOLDER]
 
+============
 
 TO LAUNCH IN COMMAND PROMPT:
+
+============
+
+GITHUB LINK:
+https://github.com/ShaunTornilla/Mechdyne
 
