@@ -4,7 +4,9 @@ C:\Users\shaun\AppData\Local\Programs\Python\Python311
 ============
 
 PIP INSTALL COMMAND:
-python -m pip install [PACKAGE NAME]
+NAVIGATE TO THE PIP.EXE FOUND IN SCRIPTS FOLDER THEN...
+
+pip install [PACKAGE NAME]
 
 ============
 
