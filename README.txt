@@ -26,3 +26,7 @@ https://github.com/ShaunTornilla/Mechdyne
 
 
 CODE HAS TO BE IN SCRIPT FOLDER TO BE ABLE TO ACCESS THE IMPORTS
+
+WEBDRIVER DOCUMENTATION:
+https://selenium-python.readthedocs.io/navigating.html
+
