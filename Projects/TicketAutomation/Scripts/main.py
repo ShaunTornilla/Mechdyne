@@ -30,6 +30,6 @@ print("\n\n\nDICKSLAP\n\n\n")
 
 element.click()
 
-time.sleep(10)
+time.sleep(6)
 driver.quit()
 
