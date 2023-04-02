@@ -8,28 +8,73 @@ import time
 driver = webdriver.Edge()   
 
 ## PROVIDE URL FOR THE WINDOW TO OPEN INTO       
-driver.get('https://google.com')    
+driver.get('file:///C:/Users/shaun/Desktop/CS/Personal%20Projects/Mechdyne/Projects/Files/ITW_Ticket_Layout.html#') 
+## driver.get('https://google.com')       
+
+time.sleep(10) 
+
+def Subject_Section():
+    
+    result_list = []
+    
+    user_input = input('\n\n\n==========\n\n\nUser Input: ')
+    
+    result_list.append(Subject_Row_Zero(user_input))
+    ##Subject_Row_One()
+    
+    return result_list
 
 
-## SEARCH FOR ELEMENT IN HTML FILE BY ITS NAME
-element = driver.find_element(By.NAME, 'q')
+def Subject_Row_Zero(user_input):
+    ## Content Wrapper Main Box
+    element = driver.find_element(By.ID, 'ContentWrapper')
 
-## EDIT THE VALUE
-element.send_keys('youtube')
+    ## Grabs Form Structure
+    sub_element_1 = element.find_element(By.ID, 'regform_id')
 
-element.submit()
+    ## Grabs top Section (Subject, Priority, Status, ABS Involved)
+    sub_element_2 = sub_element_1.find_element(By.ID, 'StaticAreaDiv')
 
-## EXTRACT THE FUCK OUT OF WHAT YOU NEED TO CLICK
-element = driver.find_element(By.CLASS_NAME, 'MjjYud').find_element(By.CLASS_NAME, 'yuRUbf').find_element(By.TAG_NAME, 'h3')
+    ## Isolate the Variables to Manipulate
+    sub_element_3 = sub_element_2.find_element(By.CLASS_NAME, 'dialog')
+
+    ## Further Isolate Variables
+    sub_element_4 = sub_element_3.find_element(By.CLASS_NAME, 'dialogMainContent')
+
+    ## Grabs Table Variables Found In 
+    sub_element_5 = sub_element_4.find_element(By.ID, 'table_992063')
+
+    ## Isolate Row for Variable Manipulation
+    sub_element_6 = sub_element_5.find_element(By.ID, 'row-0')
+
+    ## USE TO INJECT SUBJECT NAME
+    row_one_result = sub_element_6.find_element(By.CLASS_NAME, 'ticketTitleInput')
+    
+    row_one_result.send_keys(user_input)
+    
+    return row_one_result
+
+
+def Subject_Row_One():
+    
+    ## TO DO 
+    
+    return result
+    
+#################### MAIN() ####################
+
+submit_list = Subject_Section()
+
+print("\n\n\n==========\n\n\n")
+print(submit_list)
+print("\n\n\n==========\n\n\n")
+
+for element in submit_list:
+    element.submit()
+##submit_input.submit()
 
 
 
-print("\n\n\nDICKSLAP\n\n\n")
-print(element)
-print("\n\n\nDICKSLAP\n\n\n")
-
-element.click()
-
-time.sleep(6)
+time.sleep(4)
 driver.quit()
 
