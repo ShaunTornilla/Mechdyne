@@ -18,9 +18,10 @@ def Subject_Section():
     result_list = []
     
     user_input = input('\n\n\n==========\n\n\nUser Input: ')
-    
     result_list.append(Subject_Row_Zero(user_input))
-    ##Subject_Row_One()
+    
+    user_input = input('\nPriority Level: ')
+    result_list.append(Subject_Row_Zero(user_input))
     
     return result_list
 
@@ -55,9 +56,33 @@ def Subject_Row_Zero(user_input):
     return row_one_result
 
 
-def Subject_Row_One():
+def Subject_Row_One(user_input):
     
-    ## TO DO 
+    ## Content Wrapper Main Box
+    element = driver.find_element(By.ID, 'ContentWrapper')
+
+    ## Grabs Form Structure
+    sub_element_1 = element.find_element(By.ID, 'regform_id')
+
+    ## Grabs top Section (Subject, Priority, Status, ABS Involved)
+    sub_element_2 = sub_element_1.find_element(By.ID, 'StaticAreaDiv')
+
+    ## Isolate the Variables to Manipulate
+    sub_element_3 = sub_element_2.find_element(By.CLASS_NAME, 'dialog')
+
+    ## Further Isolate Variables
+    sub_element_4 = sub_element_3.find_element(By.CLASS_NAME, 'dialogMainContent')
+
+    ## Grabs Table Variables Found In 
+    sub_element_5 = sub_element_4.find_element(By.ID, 'table_992063')
+
+    ## Isolate Row for Variable Manipulation
+    sub_element_6 = sub_element_5.find_element(By.ID, 'row-1')
+    
+    select = Select(sub_element_6.find_element(By.CLASS_NAME, 'ticketField'))
+    
+    result = select.select_by_value(user_input)
+    
     
     return result
     
