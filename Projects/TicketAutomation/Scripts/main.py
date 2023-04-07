@@ -13,20 +13,32 @@ driver.get('file:///C:/Users/shaun/Desktop/CS/Personal%20Projects/Mechdyne/Proje
 
 time.sleep(10) 
 
-def Subject_Section():
+def Subject_Section(input_dict):
     
     result_list = []
     
-    user_input = input('\n\n\n==========\n\n\nUser Input: ')
-    result_list.append(Subject_Row_Zero(user_input))
+    print("\n\n\n==========\n\n\n")
+    print(input_dict)
+    print("\n\n\n==========\n\n\n")    
+            
+    ##user_input = input('\n\n\n==========\n\n\nUser Input: ')
+    result_list.append(Subject_Row_Zero(input_dict["subject"]))
+    ##user_input = input('\nPriority Level: ')
+    result_list.append(Subject_Row_One(input_dict["priority"]))
     
-    user_input = input('\nPriority Level: ')
-    result_list.append(Subject_Row_Zero(user_input))
+    print("\n\n\n==========\n\n\n")
+    print(result_list)
+    print("\n\n\n==========\n\n\n")
     
     return result_list
 
 
 def Subject_Row_Zero(user_input):
+    
+    print("\n\n\n==========\n\n\n")
+    print(user_input)
+    print("\n\n\n==========\n\n\n")
+    
     ## Content Wrapper Main Box
     element = driver.find_element(By.ID, 'ContentWrapper')
 
@@ -49,14 +61,18 @@ def Subject_Row_Zero(user_input):
     sub_element_6 = sub_element_5.find_element(By.ID, 'row-0')
 
     ## USE TO INJECT SUBJECT NAME
-    row_one_result = sub_element_6.find_element(By.CLASS_NAME, 'ticketTitleInput')
+    result = sub_element_6.find_element(By.CLASS_NAME, 'ticketTitleInput')
     
-    row_one_result.send_keys(user_input)
+    result.send_keys(user_input)
     
-    return row_one_result
+    return result
 
 
 def Subject_Row_One(user_input):
+    
+    print("\n\n\n==========\n\n\n")
+    print(user_input)
+    print("\n\n\n==========\n\n\n")
     
     ## Content Wrapper Main Box
     element = driver.find_element(By.ID, 'ContentWrapper')
@@ -88,14 +104,28 @@ def Subject_Row_One(user_input):
     
 #################### MAIN() ####################
 
-submit_list = Subject_Section()
+input_dict = dict(
+    subject = input("Subject: "),
+    priority = input("Priority Value: ")
+)
+
+
+
+submit_list = Subject_Section(input_dict)
 
 print("\n\n\n==========\n\n\n")
 print(submit_list)
 print("\n\n\n==========\n\n\n")
 
+## NOTE, for whatever reason there's an extra element in the array
+## Removed with .pop() method for the following code to work.
+## WILL LOOK INTO WHAT'S HAPPENING
+submit_list.pop()
+
 for element in submit_list:
+        
     element.submit()
+    
 ##submit_input.submit()
 
 
