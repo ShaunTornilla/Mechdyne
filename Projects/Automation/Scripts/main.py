@@ -12,31 +12,27 @@ driver.get('file:///C:/Users/shaun/Desktop/CS/Personal%20Projects/Mechdyne/Proje
 ## driver.get('https://google.com')       
 
 ## Uncomment in case you need the terminal to output clean
-##time.sleep(10) 
+time.sleep(10) 
 
 ## To see the before and after of the ticket template
-time.sleep(2)
+## time.sleep(2)
 
 ## Content Wrapper Main Box and form structure as "global variable" for following functions
 search_variable = driver.find_element(By.ID, 'ContentWrapper').find_element(By.ID, 'regform_id')
 
 
-def Subject_Section(input_dict):
+def Form_Input(input_dict):
     
     result_list = []
-    
-    # print("\n\n\n==========\n\n\n")
-    # print(input_dict)
-    # print("\n\n\n==========\n\n\n")    
-            
-    ##user_input = input('\n\n\n==========\n\n\nUser Input: ')
+
+    ## Subject Section
     result_list.append(Subject_Row_Zero(input_dict["subject"]))
-    ##user_input = input('\nPriority Level: ')
     result_list.append(Subject_Row_One(input_dict["priority"], input_dict["status"], input_dict["abs_involved"]))
     
-    # print("\n\n\n==========\n\n\n")
-    # print(result_list)
-    # print("\n\n\n==========\n\n\n")
+    ## Ticket Information
+    result_list.append(Ticket_Information(input_dict["service_type"], input_dict["issue_type"]))
+    
+    
     
     return result_list
 
@@ -110,22 +106,47 @@ def Subject_Row_One(priority, status, abs_involved):
     return return_priority, return_status, return_abs_involved
 
 
-def Ticket_Information():
+def Ticket_Information(service_request, issue_type):
     
     ## TO DO
     search_element = search_variable.find_element(By.ID, 'VerticalTabsAndMenuHolder')
     
     search_sub_element_2 = search_element.find_element(By.ID, 'FIELD_DIALOG_0')
     
-    search_sub_element_3 = search_sub_element_2.find_element(By.ID, 'Ticket_Information_ecTable')
+    ## FOUND IN "TicketInformation_ecTable" table type
+    search_sub_element_3 = search_sub_element_2.find_element(By.CLASS_NAME, 'dialogMainContent')
     
-    print("\n\n\n==========\n\n\n")
-    print(search_element)
-    print("\n\n\n==========\n\n\n")
+    search_sub_element_4 = search_sub_element_3.find_element(By.ID, 'table_555737')
+    
+    row_count = search_sub_element_4.find_elements(By.TAG_NAME, "fieldset")
+    
+    print("\n=========\n\n")
+    count = 0
+    for element in row_count:
+        count+=1
+        
+    print("Row Count: ", count)
     
     
     
-    return 0
+    ## Service Type (Make a Selection)
+    # row = search_sub_element_4.find_element(By.ID, 'row-1')
+    # row_one_element = row.find_element(By.CLASS_NAME, 'fieldInput')
+    # select = Select(row_one_element.find_element(By.ID, 'Service__bType'))
+    # return_row_one = select.select_by_value(service_request)
+    
+    # ## Type
+    # row = search_sub_element_4.find_element(By.ID, 'row-2')
+    # row_two_element =  row.find_element(By.CLASS_NAME, 'fieldInput')
+    # select = Select(row_two_element.find_element(By.ID, 'Type'))
+    # return_row_two = select.select_by_value(issue_type)
+    
+    # print("\n\n\n==========\n\n\n")
+    # print(row_two_element)
+    # print("\n\n\n==========\n\n\n")
+    
+    return 0#return_row_one##, return_row_two
+
 #################### MAIN() ####################
 
 # input_dict = dict(
@@ -141,22 +162,23 @@ input_dict = dict(
     subject = "Dickslap",
     priority = "3",
     status = "In__bProcess",
-    abs_involved = "Yes"
+    abs_involved = "Yes",
+    service_type = "Service__bRequest",
+    issue_type = "Password__bResets"
 )
 
-submit_list = []
+##submit_list = []
 
-submit_list.append(Subject_Section(input_dict))
+submit_list = Form_Input(input_dict)
 
-Ticket_Information()
-
-# print("\n\n\n==========\n\n\n")
-# print(submit_list)
-# print("\n\n\n==========\n\n\n")
+print("\n\n\n==========\n\n\n")
+print(submit_list)
+print("\n\n\n==========\n\n\n")
 
 ## NOTE, for whatever reason there's an extra element in the array
 ## Removed with .pop() method for the following code to work.
 ## WILL LOOK INTO WHAT'S HAPPENING... eventually maybe not, whatever
+submit_list.pop()
 submit_list.pop()
 
 for element in submit_list:
