@@ -3,7 +3,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 import time
 
-
 ## GRABS THE BROWSER YOU WANT TO USE AND OPENS IT
 driver = webdriver.Edge()   
 
