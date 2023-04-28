@@ -1,10 +1,16 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
+
 import time
+
+#############
+
 
 ## GRABS THE BROWSER YOU WANT TO USE AND OPENS IT
 thriveworks = webdriver.Edge()
+
 ##driver2 = webdriver.Edge()
 
 def grab_sign_in_pages():
@@ -17,13 +23,14 @@ def grab_sign_in_pages():
     ##
     ##
     ##
-    
-    ##time.sleep(10)
+    # time.sleep(10)
 
     
     return thriveworks
 
 def open_thriveworks():
+    
+    
     
     field_input = thriveworks.find_element(By.CLASS_NAME, 'whsOnd.zHQkBf')
     field_input.send_keys("shaun.tornilla@thriveworks.com")
@@ -36,11 +43,16 @@ def open_thriveworks():
     field_input = thriveworks.find_element(By.CLASS_NAME, 'whsOnd.zHQkBf')
     field_input.send_keys("GuitarPlayer2022#")
     
+
     
-    next_input = thriveworks.find_element(By.ID, 'passwordNext')
-    next_input.click()
+    # next_input = thriveworks.find_element(By.ID, 'passwordNext')
+    # next_input.click()
     
-    time.sleep(30)
+    ## HOW TO OPEN A TAB
+    thriveworks.switch_to.new_window('tab')
+    thriveworks.get("https://google.com")
+    
+    time.sleep(10)
     
     return 0
 
@@ -51,7 +63,11 @@ def open_thriveworks():
 
 grab_sign_in_pages()
 
+done = False
+
+    
 open_thriveworks()
+
 
 
 time.sleep(10)
